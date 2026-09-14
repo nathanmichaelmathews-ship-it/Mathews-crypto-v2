@@ -13,10 +13,11 @@ const COINS = [
   { symbol: "ONDO",   id: "ondo-finance" },
   { symbol: "MORPHO", id: "morpho" },
   { symbol: "AERO",   id: "aerodrome-finance" },
-  { symbol: "ATH",    id: "aethir" },
-  { symbol: "PLUME",  id: "plume" },
-  { symbol: "NEAR",   id: "near" } ,   { symbol: "SYRUP",  id: "syrup" },
+  { symbol: "NEAR",   id: "near" },
+  { symbol: "SYRUP",  id: "maple-finance" },
   { symbol: "SKY",    id: "sky" },
+];
+
          // ← added Jul 20 2026
 ];
 
