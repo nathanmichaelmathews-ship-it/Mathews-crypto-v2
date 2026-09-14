@@ -15,7 +15,9 @@ const COINS = [
   { symbol: "AERO",   id: "aerodrome-finance" },
   { symbol: "ATH",    id: "aethir" },
   { symbol: "PLUME",  id: "plume" },
-  { symbol: "NEAR",   id: "near" }          // ← added Jul 20 2026
+  { symbol: "NEAR",   id: "near" } ,   { symbol: "SYRUP",  id: "syrup" },
+  { symbol: "SKY",    id: "sky" },
+         // ← added Jul 20 2026
 ];
 
 export default async function handler(req, res) {
