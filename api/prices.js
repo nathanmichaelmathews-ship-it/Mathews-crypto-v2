@@ -1,63 +1,18 @@
-// api/prices.js — Mathews crypto feed (drop-in replacement)
-// Adds: NEAR · Cache-Control: no-store (fixes daily-stale cache)
-// Schema identical to existing feed output.
-
-const COINS = [
-  { symbol: "BTC",    id: "bitcoin" },
-  { symbol: "ETH",    id: "ethereum" },
-  { symbol: "XRP",    id: "ripple" },
-  { symbol: "HYPE",   id: "hyperliquid" },
-  { symbol: "LINK",   id: "chainlink" },
-  { symbol: "SUI",    id: "sui" },
-  { symbol: "TAO",    id: "bittensor" },
-  { symbol: "ONDO",   id: "ondo-finance" },
-  { symbol: "MORPHO", id: "morpho" },
-  { symbol: "AERO",   id: "aerodrome-finance" },
-  { symbol: "NEAR",   id: "near" },
-  { symbol: "SYRUP",  id: "maple-finance" },
-  { symbol: "SKY",    id: "sky" },
-];
-
-         // ← added Jul 20 2026
-];
+// api/prices.js — the legacy feed (/prices.json via vercel.json rewrite). Schema unchanged; coverage = every configured coin
+// (portfolio + weekly + monthly + bench — NEAR and SYRUP included). Coinbase last price for Coinbase-listed names, CoinGecko
+// for market cap / volume / 24h change. Cache-Control: no-store. Optional ?group=portfolio · ?symbols=BTC,ETH,NEAR
+import { legacyFeed } from '../lib/derived.mjs';
+import { nowIso } from '../lib/util.mjs';
 
 export default async function handler(req, res) {
-  const t0 = Date.now();
-  const ids = COINS.map(c => c.id).join(",");
-  const url =
-    "https://api.coingecko.com/api/v3/simple/price?ids=" + ids +
-    "&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true" +
-    "&include_market_cap=true&include_last_updated_at=true";
-
-  let error = null;
-  let prices = [];
-
+  const url = new URL(req.url, 'http://localhost');
+  const q = Object.fromEntries(url.searchParams.entries());
+  res.setHeader('Cache-Control', 'no-store, max-age=0');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   try {
-    const r = await fetch(url, { headers: { accept: "application/json" } });
-    if (!r.ok) throw new Error("CoinGecko HTTP " + r.status);
-    const data = await r.json();
-    prices = COINS
-      .filter(c => data[c.id])
-      .map(c => ({
-        symbol: c.symbol,
-        coingecko_id: c.id,
-        usd: data[c.id].usd,
-        change_24h_pct: data[c.id].usd_24h_change,
-        volume_24h_usd: data[c.id].usd_24h_vol,
-        market_cap_usd: data[c.id].usd_market_cap,
-        last_updated_unix: data[c.id].last_updated_at
-      }));
+    const out = await legacyFeed({ group: q.group, symbols: q.symbols });
+    res.status(200).json(out);
   } catch (e) {
-    error = String(e.message || e);
+    res.status(200).json({ timestamp_utc: nowIso(), source: 'hub', fetch_duration_ms: 0, error: String(e && e.message || e), prices: [] });
   }
-
-  res.setHeader("Cache-Control", "no-store, max-age=0");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.status(200).json({
-    timestamp_utc: new Date().toISOString(),
-    source: "CoinGecko v3 /simple/price",
-    fetch_duration_ms: Date.now() - t0,
-    error,
-    prices
-  });
 }

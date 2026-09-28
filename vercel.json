@@ -1,3 +1,18 @@
 {
-  "rewrites": [{ "source": "/prices.json", "destination": "/api/prices" }]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/hub.js": { "maxDuration": 60 },
+    "api/prices.js": { "maxDuration": 30 }
+  },
+  "rewrites": [
+    { "source": "/prices.json", "destination": "/api/prices" },
+    { "source": "/api/all", "destination": "/api/hub?fn=all" },
+    { "source": "/api/:fn", "destination": "/api/hub?fn=:fn" },
+    { "source": "/d/:fn", "destination": "/api/hub?fn=:fn" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [ { "key": "Access-Control-Allow-Origin", "value": "*" }, { "key": "X-Content-Type-Options", "value": "nosniff" } ] },
+    { "source": "/data/(.*)", "headers": [ { "key": "Cache-Control", "value": "no-store, max-age=0" } ] },
+    { "source": "/index.html", "headers": [ { "key": "Cache-Control", "value": "no-store, max-age=0" } ] }
+  ]
 }

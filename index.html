@@ -1,157 +1,160 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="color-scheme" content="dark"><title>Mathews Command Deck v19.1</title><style>
-:root{--bg:#0B0F14;--card:#141A22;--card2:#0F141B;--line:#222B36;--ink:#EDF1F6;--mut:#9AA8B8;--dim:#738496;
---grn:#4ADE80;--red:#FF5C5C;--amb:#F5B43C;--org:#FF8A3D;--blu:#5CA8FF;--vio:#B07CFF;
---grnT:rgba(74,222,128,.12);--redT:rgba(255,92,92,.12);--ambT:rgba(245,180,60,.14);--orgT:rgba(255,138,61,.14);--bluT:rgba(92,168,255,.13);--vioT:rgba(176,124,255,.14);
---mono:ui-monospace,"SF Mono",Menlo,monospace}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:14px 12px calc(28px + env(safe-area-inset-bottom))}
-.wrap{max-width:520px;margin:0 auto}h1{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:2px 0 4px}
-.stampline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.stamp{font-family:var(--mono);font-size:12.5px;color:var(--mut)}
-.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--grnT);color:var(--grn)}
-.live .p{width:7px;height:7px;border-radius:99px;background:var(--grn);animation:pl 1.6s ease-in-out infinite}
-.live.off{background:var(--ambT);color:var(--amb)}.live.off .p{background:var(--amb);animation:none}
-@keyframes pl{0%,100%{opacity:1}50%{opacity:.35}}@media(prefers-reduced-motion:reduce){.live .p{animation:none}}
-.refresh{margin-left:auto;background:var(--card);border:1px solid var(--line);color:var(--mut);font:600 12.5px/1 -apple-system,sans-serif;padding:8px 13px;border-radius:99px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin:12px 0}
-.plabel{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;font-weight:600}
+<meta name="color-scheme" content="dark"><title>Mathews Command Deck v20</title>
+<meta name="description" content="Live book, kill-switch inputs, BTC structure gates, orders, runner flags, watchlist — every number fetched live by the hub.">
+<style>
+:root{--bg:#0B0F14;--card:#141A22;--card2:#0F141B;--line:#222B36;--ink:#EDF1F6;--mut:#9AA8B8;--dim:#738496;--grn:#4ADE80;--red:#FF5C5C;--amb:#F5B43C;--blu:#5CA8FF;--vio:#B07CFF;
+--grnT:rgba(74,222,128,.12);--redT:rgba(255,92,92,.12);--ambT:rgba(245,180,60,.14);--bluT:rgba(92,168,255,.13);--mono:ui-monospace,"SF Mono",Menlo,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:12px 12px calc(28px + env(safe-area-inset-bottom))}
+.wrap{max-width:580px;margin:0 auto}h1{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:2px 0 4px}
+.stampline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.stamp{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--grnT);color:var(--grn)}
+.live .p{width:7px;height:7px;border-radius:99px;background:var(--grn);animation:pl 1.6s ease-in-out infinite}.live.off{background:var(--ambT);color:var(--amb)}.live.off .p{background:var(--amb);animation:none}
+.live.err{background:var(--redT);color:var(--red)}.live.err .p{background:var(--red);animation:none}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:.35}}
+.refresh{margin-left:auto;background:var(--card);border:1px solid var(--line);color:var(--mut);font:600 12px/1 -apple-system,sans-serif;padding:8px 13px;border-radius:99px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+.plabel{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.plabel .st{font-family:var(--mono);text-transform:none;letter-spacing:0;color:var(--dim);font-weight:500}
 .booknum{font-family:var(--mono);font-size:30px;font-weight:800}.bookrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.pl{font-family:var(--mono);font-size:14px;font-weight:700;padding:3px 9px;border-radius:99px}
-.up{color:var(--grn);background:var(--grnT)}.dn{color:var(--red);background:var(--redT)}
-.booksub{font-size:13px;color:var(--mut);margin-top:7px;line-height:1.5}.booksub b{color:var(--ink)}
-/* kill-switch gauge â the centerpiece */
-.ksbig{display:flex;align-items:center;gap:14px}
-.ksnum{font-family:var(--mono);font-size:44px;font-weight:800;color:var(--amb);line-height:1}
-.kstier{font-size:12px;font-weight:800;letter-spacing:.05em;color:var(--amb);background:var(--ambT);padding:5px 10px;border-radius:99px}
-.ksbar{flex:1;height:10px;border-radius:99px;background:var(--card2);position:relative;overflow:hidden}
-.ksfill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--grn),var(--amb) 60%,var(--red));border-radius:99px}
-.ksmk{position:absolute;top:-3px;width:2px;height:16px;background:var(--dim)}
-.ks{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-.kchip{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;border-radius:99px;padding:5px 9px}
-.kR{color:var(--red);background:var(--redT)}.kA{color:var(--amb);background:var(--ambT)}.kG{color:var(--grn);background:var(--grnT)}
-.kd{width:7px;height:7px;border-radius:99px;background:currentColor}
-.ksrule{margin-top:10px;font-size:12.5px;color:var(--mut);line-height:1.5}.ksrule b{color:var(--ink)}
-/* gate rail */
-.rail{position:relative;height:46px;margin:26px 2px 6px}.track{position:absolute;top:20px;left:0;right:0;height:7px;border-radius:99px;background:#1A222C}
-.mark{position:absolute;top:12px;width:2px;height:23px;border-radius:2px}
-.mlab{position:absolute;top:-12px;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;color:var(--dim);white-space:nowrap;font-weight:700}
-.btcdot{position:absolute;top:15px;width:17px;height:17px;border-radius:99px;background:var(--org);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--org);transform:translateX(-50%)}
-.btclab{position:absolute;top:40px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:var(--org);font-weight:800;white-space:nowrap}
-.sleeve{margin-top:16px;font-size:13px;color:var(--mut);border-top:1px dashed var(--line);padding-top:10px;line-height:1.5}.sleeve b{color:var(--ink)}
-/* coins */
-details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:9px 0;overflow:hidden}
-details[open]{border-color:#2E3947}summary{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 13px 10px;cursor:pointer}
-summary::-webkit-details-marker{display:none}.tick{font-weight:800;font-size:16px;min-width:66px}
-.px{font-family:var(--mono);font-size:14px}.delta{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px}
-.chip{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.04em;padding:5px 9px;border-radius:99px;white-space:nowrap}
-.c-grn{color:var(--grn);background:var(--grnT)}.c-blu{color:var(--blu);background:var(--bluT)}.c-amb{color:var(--amb);background:var(--ambT)}
-.c-org{color:var(--org);background:var(--orgT)}.c-red{color:var(--red);background:var(--redT)}.c-vio{color:var(--vio);background:var(--vioT)}
-.valrow{display:flex;gap:10px;width:100%;font-family:var(--mono);font-size:12.5px;color:var(--mut)}.valrow b{color:var(--ink)}
-.body{padding:0 13px 12px;border-top:1px dashed var(--line)}
-.trig{font-family:var(--mono);font-size:12.5px;color:var(--mut);margin:10px 0 4px;line-height:1.7}.trig b{color:var(--ink)}
-.note{font-size:13px;color:var(--mut);line-height:1.5}.note b{color:var(--ink)}
-.cal{padding:0;margin:0}.cal li{list-style:none;display:flex;gap:11px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13px;line-height:1.45}
-.cal li:last-child{border-bottom:none}.cdate{font-family:var(--mono);font-size:11.5px;font-weight:800;color:var(--blu);min-width:82px;padding-top:1px}
-.cstar{color:var(--amb)}.cwhat{color:var(--mut)}.cwhat b{color:var(--ink)}
-footer{font-size:11.5px;color:var(--dim);text-align:center;margin-top:18px;line-height:1.6}
-.err{display:none;margin:10px 0;padding:11px 13px;border-radius:12px;background:var(--ambT);color:var(--amb);font-size:13px}
+.pl{font-family:var(--mono);font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px}.up{color:var(--grn);background:var(--grnT)}.dn{color:var(--red);background:var(--redT)}.fl{color:var(--mut);background:var(--card2)}
+.sub{font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.5}.sub b{color:var(--ink)}
+.ksbig{display:flex;align-items:center;gap:14px}.ksnum{font-family:var(--mono);font-size:40px;font-weight:800;line-height:1}
+.kstier{font-size:11px;font-weight:800;letter-spacing:.05em;padding:5px 10px;border-radius:99px}
+.ksbar{flex:1;height:10px;border-radius:99px;background:var(--card2);position:relative;overflow:hidden}.ksfill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--grn),var(--amb) 60%,var(--red));border-radius:99px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{font-family:var(--mono);font-size:11px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card2)}
+.chip.g{border-color:rgba(74,222,128,.4)}.chip.a{border-color:rgba(245,180,60,.6);background:var(--ambT)}.chip.r{border-color:rgba(255,92,92,.6);background:var(--redT)}.chip.n{opacity:.6}
+table{width:100%;border-collapse:collapse;font-size:12px}th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);text-align:right;padding:4px 4px;border-bottom:1px solid var(--line);font-weight:600}
+td{padding:5px 4px;border-bottom:1px solid rgba(34,43,54,.6);text-align:right;font-family:var(--mono);white-space:nowrap}th:first-child,td:first-child{text-align:left;font-family:-apple-system,sans-serif;font-weight:700}
+.g{color:var(--grn)}.r{color:var(--red)}.a{color:var(--amb)}.b{color:var(--blu)}.v{color:var(--vio)}.m{color:var(--mut)}
+.row{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid rgba(34,43,54,.6);font-size:12.5px}.row:last-child{border-bottom:0}.row .k{color:var(--mut)}.row .vv{font-family:var(--mono);text-align:right;max-width:64%}
+.fill{background:var(--redT)}.err{color:var(--red);font-family:var(--mono);font-size:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.tab{font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut);background:var(--card2)}.tab.on{color:var(--ink);border-color:var(--blu);background:var(--bluT)}
+.links a{display:inline-block;margin:3px 6px 3px 0;font-family:var(--mono);font-size:11.5px;color:var(--blu);text-decoration:none}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.note{font-size:11.5px;color:var(--dim);margin-top:6px}
 </style></head><body><div class="wrap">
-<header><h1>Mathews Command Deck</h1>
-<div class="stampline"><span class="live" id="liveBadge"><span class="p"></span><span id="liveTxt">LIVE</span></span>
-<span class="stamp" id="stamp">loadingâ¦</span><button class="refresh" id="refreshBtn">Refresh</button></div>
-<div class="stamp" style="margin-top:5px">v19.1 Â· supercycle targets, signal-governed exits Â· holdings verified Jul 19 '26</div></header>
-<div class="err" id="errBox">Feed unreachable â showing Jul 20 cache. Tap Refresh.</div>
+<h1>Mathews Command Deck <span class="m">v20</span></h1>
+<div class="stampline"><span class="stamp" id="stamp">loading…</span><span class="live off" id="live"><span class="p"></span><span id="livetxt">FETCHING</span></span><button class="refresh" onclick="loadAll()">Refresh</button></div>
 
-<section class="panel"><div class="plabel">Alt book â live mark</div>
-<div class="bookrow"><span class="booknum" id="bookVal">â</span><span class="pl" id="bookPL">â</span></div>
-<div class="booksub">Cost basis <b>$163,710</b> Â· 10 coins + NEAR ladder Â· BTC sleeve excluded.<br>
-Full-ladder plan = <b>$801K</b> gross (top-decile aim) Â· base case <b>~$280â360K</b> on L1/L2 fills.</div></section>
+<div class="panel"><div class="plabel"><span>Book</span><span class="st" id="st-book">…</span></div>
+  <div class="bookrow"><span class="booknum" id="book-total">—</span><span class="pl fl" id="book-pl">—</span></div>
+  <div class="sub" id="book-sub">alts + BTC sleeve + USDC · positions from config as of <span id="asof"></span></div>
+</div>
 
-<section class="panel"><div class="plabel">Kill switch v2 â weighted, two-tier</div>
-<div class="ksbig"><span class="ksnum">37.5</span><span class="kstier">TRIM 25â40%</span>
-<div class="ksbar"><div class="ksfill" style="width:37.5%"></div><div class="ksmk" style="left:30%"></div><div class="ksmk" style="left:50%"></div></div></div>
-<div class="ks">
-<span class="kchip kR"><span class="kd"></span>Oil/Hormuz</span>
-<span class="kchip kA"><span class="kd"></span>FOMC/liquidity</span>
-<span class="kchip kA"><span class="kd"></span>Credit/MOVE</span>
-<span class="kchip kA"><span class="kd"></span>Stablecoins</span>
-<span class="kchip kA"><span class="kd"></span>Funding</span>
-<span class="kchip kG"><span class="kd"></span>ETF flows â Jul 20</span>
-<span class="kchip kG"><span class="kd"></span>Power-law</span>
-<span class="kchip kG"><span class="kd"></span>DAT</span>
-<span class="kchip kG"><span class="kd"></span>Dominance</span></div>
-<div class="ksrule"><b>â¥30 = TRIM</b> (expressed via resting ladders + ONDO exit â no market selling) Â· <b>â¥50 = full alt exit</b>. Two-directional: 2 GREEN FOMC prints + BTC > FVÃ·2 = re-entry.</div></section>
+<div class="panel"><div class="plabel"><span>Kill-switch v3 — mechanical pre-grade</span><span class="st" id="st-ks">…</span></div>
+  <div class="ksbig"><span class="ksnum a" id="ks-num">—</span><div style="flex:1"><div class="ksbar"><div class="ksfill" id="ks-fill" style="width:0%"></div></div><div class="sub" id="ks-tier">TRIM ≥ 30 · FULL EXIT ≥ 50</div></div></div>
+  <div class="chips" id="ks-chips"></div>
+  <div class="note">Pre-grade only: Oil/Hormuz RED and DAT are judgment grades; the daily sweep / Sunday scan write the canonical grade into STATE.md after verifying every input and the time filter.</div>
+</div>
 
-<section class="panel"><div class="plabel">BTC â structure + sleeve</div>
-<div class="rail"><div class="track"></div>
-<div class="mark" style="background:var(--dim)" id="m58"></div><div class="mlab" id="l58">$58K line</div>
-<div class="mark" style="background:var(--blu)" id="m651"></div><div class="mlab" id="l651" style="color:var(--blu)">MA50 65.1K</div>
-<div class="mark" style="background:var(--vio)" id="m676"></div><div class="mlab" id="l676" style="color:var(--vio)">$67.6K high</div>
-<div class="btcdot" id="btcDot"></div><div class="btclab" id="btcLab">BTC â</div></div>
-<div class="sleeve"><b>Sleeve: 0.1331 BTC</b> â never sold, value <b id="sleeveVal">â</b>. Next buy <b>Aug 1</b> $1K (month-start standing). Power-law: deep-value zone, floor ~$48.8K.</div></section>
+<div class="panel"><div class="plabel"><span>BTC structure — Coinbase weekly</span><span class="st" id="st-struct">…</span></div><div id="struct"></div></div>
 
-<div class="plabel" style="margin:16px 2px 2px">Positions â tap to open</div><div id="coins"></div>
+<div class="panel"><div class="plabel"><span>Runner flags (T20) & levels</span><span class="st" id="st-flags">…</span></div><div id="flags"></div></div>
 
-<section class="panel"><div class="plabel">Calendar â signals</div><ul class="cal">
-<li><span class="cdate">Jul 21</span><span class="cwhat"><b>PLUME unlock</b> â largest ever (3.5% of cap). No action.</span></li>
-<li><span class="cdate">Jul 22</span><span class="cwhat"><b>GOOGL</b> â hyperscaler capex test opens</span></li>
-<li><span class="cdate">Jul 20/27</span><span class="cwhat"><b>CLARITY floor window</b> â ethics deal = the gate</span></li>
-<li><span class="cdate cstar">Jul 29 â</span><span class="cwhat"><b>Double-barrel:</b> FOMC 2:00 + Warsh 2:30 + MSFT/META after close</span></li>
-<li><span class="cdate">Aug 1</span><span class="cwhat"><b>BTC DCA $1K</b> â standing</span></li>
-<li><span class="cdate">Aug 3/5</span><span class="cwhat"><b>QRA</b> â bill-share signpost (Pal vs Howell)</span></li>
-<li><span class="cdate">~Aug</span><span class="cwhat"><b>TAO ETF binary</b> â approval-morning trigger armed</span></li>
-<li><span class="cdate">Aug 14</span><span class="cwhat"><b>SUI Bitbank Japan</b> listing</span></li>
-<li><span class="cdate">Sept</span><span class="cwhat"><b>NEAR ETF binary</b> (GSNR + Bitwise) â N-ladder armed</span></li>
-<li><span class="cdate">Oct</span><span class="cwhat"><b>DTCC full production</b> â LINK/ONDO/PLUME triangle live</span></li>
-<li><span class="cdate">NovâDec</span><span class="cwhat"><b>ONDO exit</b> 70% into strength â reload post-cliff</span></li>
-</ul></section>
-<footer>Feed: /prices.json Â· CoinGecko Â· no-store (always fresh) Â· Signals govern exits, price does not.<br>Reconciliation law: positions verified vs exchange actuals Â· Sheet v19.1 = source of truth.</footer>
-</div><script>
-const COST_BASIS=163710;
-const FALLBACK={ts:"2026-07-20T18:26:53.685Z",px:{BTC:[65552,1.81],ETH:[1906.43,2.59],XRP:[1.12,2.41],HYPE:[62.19,2.76],LINK:[8.60,3.69],SUI:[0.769814,3.63],TAO:[196.44,0.16],ONDO:[0.358378,4.12],MORPHO:[1.99,-0.38],AERO:[0.443351,-0.13],ATH:[0.00464821,-2.32],PLUME:[0.01069125,4.68],NEAR:[1.98,0]}};
-const COINS=[
-{s:"ETH",q:16,b:2100,t:6542,chip:["CORE 4 + LADDER 12","c-blu"],trig:"L1 <b>$4,252</b> Â· L2 $5,561 Â· L3 $6,542 Â· L4 $8,178 (trade-12 only)",note:"4-ETH core rides to next cycle. Staking-ETF flows leading BTC's."},
-{s:"HYPE",q:376,b:41.26,t:165,chip:["FEE ENGINE","c-grn"],trig:"L1 <b>$107.25</b> Â· Aug 6 unlock Â· AQAv2 accrual Aug 26 â pay Oct 3",note:"9.4% of ALL perp OI. T. Rowe 6.14% core weight. a16z handoff at $57.88."},
-{s:"LINK",q:1563.94,b:12.76,t:47,chip:["DTCC OCT","c-blu"],trig:"L1 <b>$30.55</b> Â· live tests NOW â full production Oct",note:"CRE embedded in DTCC collateral rails. Supply cliff Oct '27."},
-{s:"TAO",q:59.5,b:220,t:1150,chip:["AUG BINARY","c-amb"],trig:"L1 <b>$747.50</b> Â· unrungged â approval-morning manual per Nathan",note:"$195â200 higher-low held. Root Reborn = value-accretive. Gate adjudicates SUI half."},
-{s:"ONDO",q:44712,b:0.70,t:3.45,chip:["EXIT DEC â RELOAD","c-grn"],trig:"Sell <b>70% into strength</b> by early Dec Â· out before Jan 18 cliff Â· reload post-digestion",note:"Perps live, Ondo Stocks $1B+. $3.45 = Phase-2 target."},
-{s:"MORPHO",q:6488,b:1.24,t:8.55,chip:["APOLLO FLOOR","c-blu"],trig:"L1 <b>$5.56</b> Â· fee switch = the re-rate (never yet drafted)",note:"Apollo buying 90M on 48-mo program. One-delegate governance = instant if drafted."},
-{s:"AERO",q:27977.17,b:0.4778,t:4.25,chip:["T-RUNGS RESTING","c-amb"],trig:"T1 <b>$0.62</b>Ã3000 Â· T2 .75 Â· T3 .90 Â· T5 1.40 resting Â· launch window ~11d",note:"Binance listed Jul 17 (sell-the-news done). ~5x price-to-fees. Migration notice = same-day re-place."},
-{s:"SUI",q:7617.99,b:0.8889,t:8.50,chip:["TAO-GATE","c-org"],trig:"L1 <b>$5.53</b> Â· Bitbank Aug 14 Â· 4th outage = 100% out any price",note:"Half position post-split. Google A2A + 6M-TPS agent demo = the claim. Gate decides on TAO approval."},
-{s:"NEAR",q:3046.38,b:1.9285,t:9.45,chip:["N-LADDER TO PLACE","c-vio"],trig:"N1 <b>$5.95</b>Â·609 Â· N2 7.82Â·762 Â· N3 10.28Â·914 Â· N4 15.20Â·457 Â· runner 305",note:"Sept ETF binary. Buybacks inflecting (NRY 4%+). $1.50 thesis-damage line armed."},
-{s:"PLUME",q:274453,b:0.059,t:0.25,chip:["EXIT-ONLY","c-vio"],trig:"Largest unlock <b>Jul 21</b> (3.5% of cap) Â· Oct 1 reassessment gate",note:"SEC transfer-agent seat wired into DTCC. $0.25 = supercycle ceiling; signals govern."}];
-const SLEEVE=0.1331;
-function fmtPx(v){if(v>=1000)return "$"+v.toLocaleString("en-US",{maximumFractionDigits:0});if(v>=1)return "$"+v.toFixed(2);if(v>=0.01)return "$"+v.toFixed(4);return "$"+v.toFixed(7).replace(/0+$/,"")}
-function fmtUsd(v){return "$"+Math.round(v).toLocaleString("en-US")}
-function age(ts){const m=Math.max(0,Math.round((Date.now()-new Date(ts).getTime())/60000));if(m<1)return "just now";if(m<60)return m+"m ago";const h=Math.floor(m/60);if(h<48)return h+"h "+(m%60)+"m ago";return Math.floor(h/24)+"d ago"}
-function render(px,ts,live){
-document.getElementById("stamp").textContent="priced "+age(ts);
-const b=document.getElementById("liveBadge");b.classList.toggle("off",!live);
-document.getElementById("liveTxt").textContent=live?"LIVE":"CACHED";
-document.getElementById("errBox").style.display=live?"none":"block";
-let total=0;COINS.forEach(c=>{if(px[c.s])total+=c.q*px[c.s][0]});
-const pl=total-COST_BASIS,plp=pl/COST_BASIS*100,el=document.getElementById("bookPL");
-document.getElementById("bookVal").textContent=fmtUsd(total);
-el.className="pl "+(pl>=0?"up":"dn");
-el.textContent=(pl>=0?"+$":"\u2212$")+Math.round(Math.abs(pl)).toLocaleString()+" \u00b7 "+(plp>=0?"+":"")+plp.toFixed(1)+"%";
-const btc=px.BTC[0],LO=52000,HI=75000,pos=v=>Math.min(98,Math.max(2,(v-LO)/(HI-LO)*100))+"%";
-[["m58",58000],["m651",65136],["m676",67600]].forEach(([id,v])=>{document.getElementById(id).style.left=pos(v);document.getElementById("l"+id.slice(1)).style.left=pos(v)});
-document.getElementById("btcDot").style.left=pos(btc);
-const lab=document.getElementById("btcLab");lab.style.left=pos(btc);lab.textContent="BTC "+fmtPx(btc);
-document.getElementById("sleeveVal").textContent=fmtUsd(SLEEVE*btc);
-const host=document.getElementById("coins");host.innerHTML="";
-COINS.forEach(c=>{const p=px[c.s];if(!p)return;const[v,ch]=p,val=c.q*v,pnl=(v/c.b-1)*100;
-const d=document.createElement("details");
-d.innerHTML='<summary><span class="tick">'+c.s+'</span><span class="px">'+fmtPx(v)+'</span>'+
-'<span class="delta '+(ch>=0?'up':'dn')+'">'+(ch>=0?'+':'')+ch.toFixed(1)+'%</span>'+
-'<span class="chip '+c.chip[1]+'">'+c.chip[0]+'</span>'+
-'<span class="valrow"><span>val <b>'+fmtUsd(val)+'</b></span><span>vs basis <b>'+(pnl>=0?'+':'')+pnl.toFixed(0)+'%</b></span><span>target <b>'+fmtPx(c.t)+'</b></span></span></summary>'+
-'<div class="body"><div class="trig">'+c.trig+'</div><div class="note">'+c.note+'</div></div>';
-host.appendChild(d)})}
-async function load(){document.getElementById("stamp").textContent="refreshing\u2026";
-try{const r=await fetch("/prices.json",{cache:"no-store"});if(!r.ok)throw 0;const j=await r.json();
-const px={};(j.prices||[]).forEach(p=>{px[p.symbol]=[p.usd,p.change_24h_pct||0]});
-if(!px.BTC)throw 0;if(!px.NEAR)px.NEAR=FALLBACK.px.NEAR;
-render(px,j.timestamp_utc||new Date().toISOString(),true)}catch(e){render(FALLBACK.px,FALLBACK.ts,false)}}
-document.getElementById("refreshBtn").addEventListener("click",load);load();
+<div class="panel"><div class="plabel"><span>Resting orders</span><span class="st" id="st-orders">…</span></div><div class="scroll" id="orders"></div><div class="note">A red row = price traded through the limit in the last 24h → POSSIBLE FILL: check the orders/USDC screen. Never assume a fill.</div></div>
+
+<div class="panel"><div class="plabel"><span>Positions</span><span class="st" id="st-pos">…</span></div><div class="scroll" id="positions"></div></div>
+
+<div class="panel"><div class="plabel"><span>Watchlist</span><span class="st" id="st-watch">…</span></div>
+  <div class="tabs" id="tabs"></div><div class="scroll" id="watch"></div></div>
+
+<div class="panel"><div class="plabel"><span>Macro · liquidity · flows</span><span class="st" id="st-macro">…</span></div><div id="macro"></div></div>
+
+<div class="panel"><div class="plabel"><span>Endpoints</span><span class="st">hub</span></div>
+  <div class="links" id="links"></div>
+  <div class="note">Add ?cb=&lt;stamp&gt; to every call from a session. Snapshot JSON (hourly): <span class="m" id="snap"></span></div>
+</div>
+</div>
+<script>
+const $=(id)=>document.getElementById(id);
+const fmt=(v,d=0)=>(v===null||v===undefined||!isFinite(v))?'—':'$'+Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const px=(v)=>(v===null||v===undefined)?'—':(v>=1000?Number(v).toLocaleString('en-US',{maximumFractionDigits:0}):v>=1?Number(v).toFixed(2):v>=0.01?Number(v).toFixed(4):Number(v).toPrecision(3));
+const pc=(v,d=1)=>(v===null||v===undefined||!isFinite(v))?'<span class="m">—</span>':`<span class="${v>0?'g':v<0?'r':'m'}">${v>0?'+':''}${Number(v).toFixed(d)}%</span>`;
+const cls=(g)=>g==='RED'?'r':g==='AMBER'?'a':g==='GREEN'?'g':'n';
+const set=(id,html)=>{$(id).innerHTML=html};
+const stat=(id,ok,ms,err)=>{$(id).innerHTML=ok?`ok${ms?' '+ms+'ms':''}`:`<span class="err">${(err||'fail').slice(0,90)}</span>`};
+const cb=()=>'&cb='+Date.now();
+async function getJ(path){const r=await fetch(path+(path.includes('?')?'':'?x=1')+cb(),{cache:'no-store'});const j=await r.json();if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j}
+let CURRENT={};
+async function loadAll(){
+  $('livetxt').textContent='FETCHING';$('live').className='live off';
+  const t0=Date.now();
+  const jobs=[loadBook(),loadStruct(),loadFlags(),loadKS(),loadMacro()];
+  await Promise.allSettled(jobs);
+  $('stamp').textContent=new Date().toISOString().replace('T',' ').slice(0,19)+' UTC · '+((Date.now()-t0)/1000).toFixed(1)+'s';
+  $('livetxt').textContent='LIVE';$('live').className='live';
+}
+async function loadBook(){
+  try{const b=await getJ('/api/book');CURRENT.book=b;const t=b.totals;
+    set('book-total',fmt(t.book_total));const pl=t.alts_unrealized_pl;$('book-pl').className='pl '+(pl>0?'up':pl<0?'dn':'fl');$('book-pl').textContent=(pl>0?'+':'')+fmt(pl)+' alts P/L';
+    set('book-sub',`alts <b>${fmt(t.alts_value)}</b> · BTC sleeve <b>${fmt(t.btc_sleeve_value)}</b> (${t.btc_sleeve_qty} BTC @ ${fmt(t.btc_price)}) · USDC <b>${fmt(t.cash_usdc)}</b> (${fmt(t.cash_held_by_orders)} held by orders) · sells resting <b>${fmt(t.book_total?b.order_summary.sells_notional_at_limit:null)}</b> at limit · positions as of ${b.as_of_positions.slice(0,10)}`);
+    stat('st-book',true,'');
+    set('positions',`<table><tr><th>Coin</th><th>Price</th><th>24h</th><th>Value</th><th>Book</th><th>P/L</th></tr>`+b.positions.map(p=>`<tr title="${p.qty} @ avg ${p.avg_cost} · target ${p.target} (${p.target_x}×)"><td>${p.symbol}</td><td>${px(p.price)}</td><td>${pc(p.change_24h_pct)}</td><td>${fmt(p.value)}</td><td>${p.pct_of_book}%</td><td>${pc(p.unrealized_pl_pct,0)}</td></tr>`).join('')+`</table>`);stat('st-pos',true,'');
+    set('orders',b.orders.map(o=>`<div class="row ${o.possible_fill_24h?'fill':''}"><span><b>${o.venue==='Robinhood'?'RH · ':''}${o.symbol} <span class="${o.side==='SELL'?'r':'g'}">${o.side}</span> ${o.qty} @ ${px(o.limit)}</b><br><span class="m" style="font-size:11px">${o.label||''} · spot ${px(o.last)} · 24h ${px(o.coinbase_24h_low)}–${px(o.coinbase_24h_high)}</span></span><span class="vv">${o.distance_pct===null?'—':`<span class="${o.side==='SELL'?(o.distance_pct<10?'a':''):(o.distance_pct>-5?'a':'')}">${o.distance_pct>0?'+':''}${o.distance_pct}%</span>`}${o.possible_fill_24h?'<br><span class="r" style="font-size:10.5px">POSSIBLE FILL</span>':''}</span></div>`).join(''));
+    stat('st-orders',true,'');
+  }catch(e){stat('st-book',false,0,e.message);stat('st-orders',false,0,e.message);stat('st-pos',false,0,e.message)}
+  loadWatch();
+}
+let WGROUP='portfolio';
+async function loadWatch(){
+  try{const p=CURRENT.prices||(CURRENT.prices=await getJ('/api/prices?group=portfolio,weekly,monthly,bench'));
+    set('tabs',['portfolio','weekly','monthly','bench'].map(g=>`<span class="tab ${g===WGROUP?'on':''}" onclick="WGROUP='${g}';loadWatch()">${g}</span>`).join(''));
+    const rows=p.prices.filter(r=>r.group===WGROUP);
+    set('watch',`<table><tr><th>Coin</th><th>Price</th><th>24h</th><th>7d</th><th>30d</th><th>vs hi</th></tr>`+rows.map(r=>`<tr title="mcap ${r.market_cap_usd?'$'+(r.market_cap_usd/1e9).toFixed(2)+'B':'n/a'} · vol24h ${r.volume_24h_usd?'$'+(r.volume_24h_usd/1e6).toFixed(1)+'M':'n/a'} · ${r.price_source}"><td>${r.symbol}</td><td>${px(r.usd)}</td><td>${pc(r.change_24h_pct)}</td><td>${pc(r.change_7d_pct)}</td><td>${pc(r.change_30d_pct)}</td><td>${r.pct_below_cycle_high===null?'<span class="m">—</span>':`<span class="${r.pct_below_cycle_high>-15?'g':r.pct_below_cycle_high<-50?'r':''}">${r.pct_below_cycle_high.toFixed(0)}%</span>`}</td></tr>`).join('')+`</table>`);
+    stat('st-watch',true,'');
+  }catch(e){stat('st-watch',false,0,e.message)}
+}
+async function loadStruct(){
+  try{const s=await getJ('/api/btc-structure');const w=s.last_completed_week,g=s.next_close_gates;
+    const ab=(x)=>x?'<span class="g">ABOVE</span>':'<span class="r">BELOW</span>';const yn=(x)=>x===null?'—':x?'<span class="g">yes</span>':'<span class="r">no</span>';
+    set('struct',`<div class="row"><span class="k">Spot (partial day)</span><span class="vv"><b>${fmt(s.spot)}</b> · new cycle high ${s.cycle_high.new_cycle_high_printed?'<span class="r">YES</span>':'no'} (${s.cycle_high.spot_vs_reference_pct}% vs ${fmt(s.cycle_high.reference_daily_close)})</span></div>
+<div class="row"><span class="k">Last close ${w.week_ending}</span><span class="vv"><b>${fmt(w.close)}</b> · RSI ${w.weekly_rsi14} · ${w.consecutive_weekly_closes_above_50w} closes above 50W</span></div>
+<div class="row"><span class="k">20W ${fmt(w.sma20)}</span><span class="vv">${ab(w.above_20w)} ${w.close_vs_sma20_pct}% · rising strict ${yn(w.sma20_rising_strict)} · 4wk ${yn(w.sma20_rising_4wk_slope)}</span></div>
+<div class="row"><span class="k">50W ${fmt(w.sma50)}</span><span class="vv">${ab(w.above_50w)} ${w.close_vs_sma50_pct}% · rising ${yn(w.sma50_rising)}</span></div>
+<div class="row"><span class="k">200W ${fmt(w.sma200)}</span><span class="vv">${w.sma200?ab(w.close>w.sma200)+' '+w.close_vs_sma200_pct+'%':'—'}</span></div>
+<div class="row"><span class="k">Next close ${g.week_ending}</span><span class="vv">50W gate <b>${fmt(g.gate_50w)}</b> (${g.spot_vs_gate_50w_pct}%) · 20W gate ${fmt(g.gate_20w)}<br><span class="m">50W rises if &gt; ${fmt(g.x_for_50w_to_rise)} · 20W strict &gt; ${fmt(g.x_for_20w_to_rise_strict)} · 4wk &gt; ${fmt(g.x_for_20w_to_rise_4wk_slope)}</span></span></div>
+<div class="row"><span class="k">T09 (90d high ${fmt(s.t09.high_90d_live)})</span><span class="vv">confirmed ${s.t09.confirmed_path_levels_live.map(v=>fmt(v)).join(' / ')}<br><span class="m">unconfirmed ${s.t09.unconfirmed_path_levels_live.map(v=>fmt(v)).join(' / ')}</span></span></div>
+<div class="row"><span class="k">Power law</span><span class="vv">FV ${fmt(s.power_law.fair_value)} · ratio ${s.power_law.ratio_spot} ${s.power_law.max_dca_zone?'<span class="g">MAX-DCA zone</span>':''}</span></div>`);
+    stat('st-struct',true,'');
+  }catch(e){stat('st-struct',false,0,e.message)}
+}
+async function loadFlags(){
+  try{const f=await getJ('/api/flags');
+    set('flags',f.flags.map(x=>x.error?`<div class="row"><span class="k">${x.symbol}</span><span class="err">${x.error}</span></div>`:`<div class="row"><span class="k">${x.symbol} → ${px(x.effective_level)}</span><span class="vv">${x.fired_on_last_completed_close?'<span class="r"><b>FIRED on close</b></span>':x.live_below_level?'<span class="a">below intraday</span>':'<span class="g">clear</span>'} · live ${px(x.live_price)} (${x.live_vs_level_pct>0?'+':''}${x.live_vs_level_pct}%)<br><span class="m">0.70 × ${x.highest_close?px(x.highest_close.close)+' ('+x.highest_close.date+')':'n/a'} · last close ${x.last_completed_close?px(x.last_completed_close.close):'—'}</span></span></div>`).join(''));
+    stat('st-flags',true,'');
+  }catch(e){stat('st-flags',false,0,e.message)}
+}
+async function loadKS(){
+  try{const k=await getJ('/api/ks');const sc=k.score_mechanical;$('ks-num').textContent=sc;$('ks-num').className='ksnum '+(sc>=50?'r':sc>=30?'a':'g');$('ks-fill').style.width=Math.min(100,sc)+'%';
+    set('ks-tier',`${k.tier_hint} · ungraded: ${k.ungraded_signals.join(', ')||'none'}`);
+    const S=k.signals;const chip=(name,g,txt)=>`<span class="chip ${cls(g)}">${name}: <b>${g||'n/a'}</b> ${txt||''}</span>`;
+    set('ks-chips',[chip('liquidity',S.liquidity.grade,S.liquidity.netliq_13w_pct!==undefined?`13w ${S.liquidity.netliq_13w_pct}% · hike90d ${S.liquidity.hike_within_90d}`:''),
+      chip('credit',S.credit.grade,S.credit.hy_oas?`OAS ${S.credit.hy_oas.value} (${S.credit.oas_change_4w_bp>0?'+':''}${S.credit.oas_change_4w_bp}bp/4w) · MOVE ${S.credit.move??'n/a'}`:''),
+      chip('trend',S.trend.grade,S.trend.close?`${fmt(S.trend.close)} vs 20W ${fmt(S.trend.sma20)} / 50W ${fmt(S.trend.sma50)}`:''),
+      chip('stables',S.stablecoins.grade,S.stablecoins.total_b?`$${S.stablecoins.total_b}B · 4w ${S.stablecoins.change_4w_pct}% · 8w ${S.stablecoins.change_8w_pct}%`:''),
+      chip('ETF',S.etf.grade,S.etf.sum_last5_musd!==undefined?`5d ${S.etf.sum_last5_musd}M · 20d ${S.etf.sum_last20_musd}M · out-streak ${S.etf.consecutive_outflow_days}d/${S.etf.consecutive_outflow_weeks}w`:'(Farside n/a)'),
+      chip('oil',S.oil.grade,S.oil.brent?`Brent ${S.oil.brent} · RED = judgment`:'n/a'),chip('DAT',null,'judgment'),
+      chip('leverage',S.leverage.grade,S.leverage.btc_funding_8h_pct_range?`BTC funding ${S.leverage.btc_funding_8h_pct_range[0]}…${S.leverage.btc_funding_8h_pct_range[1]}%/8h`:''),
+      chip('dominance',S.dominance.grade,`BTC.D ${S.dominance.btc_dominance_pct??'n/a'}%`)].join(''));
+    stat('st-ks',true,'');
+  }catch(e){stat('st-ks',false,0,e.message)}
+}
+async function loadMacro(){
+  try{const [m,f,s,g,fg]=await Promise.all([getJ('/api/macro'),getJ('/api/fred'),getJ('/api/stablecoins').catch(()=>null),getJ('/api/global').catch(()=>null),getJ('/api/fear-greed').catch(()=>null)]);
+    const q=(sym)=>m.quotes[sym]&&!m.quotes[sym].error?`<b>${Number(m.quotes[sym].last).toLocaleString('en-US',{maximumFractionDigits:2})}</b> ${pc(m.quotes[sym].change_1d_pct)}`:'—';
+    const nl=f.derived.net_liquidity,oas=f.derived.hy_oas,fed=f.derived.fed;
+    set('macro',`<div class="row"><span class="k">MOVE</span><span class="vv">${q('^MOVE')} · weekly ${m.derived.move?m.derived.move.weekly_closes.map(w=>w.close.toFixed(1)).join(' / '):''}</span></div>
+<div class="row"><span class="k">Brent / WTI / Gold</span><span class="vv">${q('BZ=F')} · ${q('CL=F')} · ${q('GC=F')}</span></div>
+<div class="row"><span class="k">DXY / VIX / 10Y</span><span class="vv">${q('DX-Y.NYB')} · ${q('^VIX')} · ${m.derived.us10y_pct??'—'}%</span></div>
+<div class="row"><span class="k">MSTR / COIN / HOOD / IBIT</span><span class="vv">${q('MSTR')} · ${q('COIN')} · ${q('HOOD')} · ${q('IBIT')}</span></div>
+<div class="row"><span class="k">Net liquidity ${nl?nl.last.date:''}</span><span class="vv">${nl?`<b>$${nl.last.netliq_b}B</b> · 4w ${pc(nl.change_4w_pct)} · 13w ${pc(nl.change_13w_pct)}<br><span class="m">WALCL ${nl.last.walcl_b}B − TGA ${nl.last.tga_b}B − RRP ${nl.last.rrp_b}B</span>`:'—'}</span></div>
+<div class="row"><span class="k">HY OAS / Fed / Sahm</span><span class="vv">${oas?`<b>${oas.last.value}%</b> (${oas.last.date}; ${oas.change_4w_bp>0?'+':''}${oas.change_4w_bp}bp/4w)`:'—'} · ${fed?`${fed.target_upper.value}% ${fed.last_change?fed.last_change.direction+' '+fed.last_change.date:''}`:'—'} · ${f.derived.sahm?f.derived.sahm.last.value:'—'}</span></div>
+<div class="row"><span class="k">Stablecoins (DefiLlama)</span><span class="vv">${s?`<b>$${s.total_b}B</b> · 7d ${pc(s.change_7d_pct)} · 4w ${pc(s.change_4w_pct)} · 8w ${pc(s.change_8w_pct)} → ${s.ks4_grade}`:'—'}</span></div>
+<div class="row"><span class="k">BTC.D / total mcap / F&amp;G</span><span class="vv">${g?`<b>${g.market_cap_percentage.btc.toFixed(1)}%</b> · $${(g.total_market_cap.usd/1e12).toFixed(2)}T ${pc(g.market_cap_change_percentage_24h_usd)}`:'—'} · ${fg?fg.last.value+' '+fg.last.label:'—'}</span></div>`);
+    stat('st-macro',true,'');
+  }catch(e){stat('st-macro',false,0,e.message)}
+}
+(async()=>{try{const i=await getJ('/api/index');set('links',i.endpoints.map(e=>`<a href="${e.path.split(' ')[0]}" title="${e.doc.replace(/"/g,'')}">${e.path}</a>`).join(''));$('snap').textContent=i.snapshot.github_raw;$('asof').textContent=i.config_as_of.slice(0,40)}catch(e){set('links','<span class="err">'+e.message+'</span>')}})();
+loadAll();
 </script></body></html>

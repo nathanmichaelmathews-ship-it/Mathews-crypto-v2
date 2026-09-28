@@ -1,0 +1,13 @@
+{
+  "name": "mathews-crypto-hub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mathews crypto data hub — live prices feed, kill-switch inputs, BTC structure gates, book/orders, on-chain, macro, derivatives, DeFi value capture. Vercel serverless functions + hourly GitHub Actions snapshot.",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "snapshot": "node scripts/snapshot.mjs",
+    "test": "node test/run.mjs",
+    "check": "node --check api/hub.js && node --check api/prices.js && node --check lib/util.mjs && node --check lib/collectors.mjs && node --check lib/derived.mjs && node --check config/hub.config.mjs && node --check scripts/snapshot.mjs"
+  }
+}
