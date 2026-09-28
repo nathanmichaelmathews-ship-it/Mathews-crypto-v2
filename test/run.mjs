@@ -28,9 +28,9 @@ await run('depth', () => D.depth({ symbol: 'ONDO' }), (v) => v.depth_usd.bid_2pc
 const fr = await run('fred', () => D.fred({}), (v) => v.derived.net_liquidity && v.derived.net_liquidity.change_13w_pct !== null && v.derived.hy_oas.change_4w_bp !== null && v.derived.fed.last_change && v.derived.sahm);
 ok('fred: Fed last change detected as HIKE 4.25→4.5 (fixture)', fr && fr.derived.fed.last_change.direction === 'HIKE' && fr.derived.fed.hike_within_90d === true);
 await run('stablecoins', () => D.stablecoins(), (v) => v.total_b > 200 && v.change_8w_pct !== null && v.ks4_grade === 'GREEN' && v.top10.length === 2);
-const fu = await run('funding', () => D.funding({}), (v) => v.table.length > 5 && v.btc_funding_8h_pct.venues >= 3 && v.sources.binance.includes('451'));
+const fu = await run('funding', () => D.funding({}), (v) => v.table.length > 5 && v.btc_funding_8h_pct.venues >= 3 && !('binance' in v.sources) && !('bybit' in v.sources));
 ok('funding: OKX missing instrument surfaces as error, not crash', fu && fu.table.find((t) => t.coin === 'TAO').okx && fu.table.find((t) => t.coin === 'TAO').okx.error);
-await run('macro', () => D.macro({}), (v) => v.derived.move && v.derived.move.weekly_closes.length >= 2 && v.derived.brent.last > 100 && v.derived.us10y_pct === 4.2);
+await run('macro', () => D.macro({}), (v) => v.derived.move && v.derived.move.weekly_closes.length >= 2 && v.derived.brent.last > 100 && v.derived.brent.source === 'FRED DCOILBRENTEU' && v.derived.vix === 16 && v.derived.us10y_pct === 4.2);
 await run('onchain', () => D.onchain(), (v) => v.mvrv_z !== null && v.pi_cycle.ma111 > 0 && v.puell_multiple !== null && v.sma200w_from_cm > 0);
 const ll = await run('llama', () => D.llama({}), (v) => v.protocols.length === 9 && v.protocols.filter((x) => !x.error).length >= 8 && v.chains.length === 4);
 ok('llama: slug fallback (MORPHO → morpho after morpho-blue 400; AERO → aerodrome-slipstream)', ll && ll.protocols.find((x) => x.symbol === 'MORPHO').slug === 'morpho' && ll.protocols.find((x) => x.symbol === 'AERO').slug === 'aerodrome-slipstream');
@@ -48,7 +48,7 @@ await run('okxOiHistory', () => C.okxOiHistory('BTC'), (v) => v.rows.length === 
 const all = await run('all', () => D.all({}), (v) => Object.keys(v.sections).length >= 15 && v.status.prices.startsWith('ok') && v.status.book.startsWith('ok') && v.sections.ks_pregrade.data.score_mechanical >= 0);
 ok('all: ks pregrade has grades for the mechanical signals', all && ['liquidity', 'credit', 'trend', 'stablecoins', 'etf', 'leverage'].every((k) => all.sections.ks_pregrade.data.signals[k].grade));
 const br = await run('brief', () => D.brief(), (v) => typeof v === 'string' && v.includes('== BOOK ==') && v.includes('== BTC STRUCTURE') && v.includes('DOWN') && v.length > 2000);
-await run('health', () => D.health(), (v) => v.total >= 15 && v.ok_count >= 14 && v.sources.binance.ok === false);
+await run('health', () => D.health(), (v) => v.total >= 15 && v.ok_count >= 14 && !v.sources.binance && !v.sources.bybit && !v.sources.farside && v.manual.etf_flows);
 await run('index', async () => D.index(), (v) => v.endpoints.length > 30);
 
 console.log('== handlers ==');
