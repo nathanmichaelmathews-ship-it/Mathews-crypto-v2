@@ -1,61 +1,61 @@
-MATHEWS HUB BRIEF — 2026-10-03T21:10:28.022Z (hub v1.0.0; 92641 ms; config 2026-09-27 v40 (Sep 27 2026 ≈ 9 PM PT) — positions/orders verified on the 12:47 PM PT orders screen + the Sep 27 close marks)
+MATHEWS HUB BRIEF — 2026-10-04T00:33:23.274Z (hub v1.0.0; 91820 ms; config 2026-09-27 v40 (Sep 27 2026 ≈ 9 PM PT) — positions/orders verified on the 12:47 PM PT orders screen + the Sep 27 close marks)
 Every number below is fetched live server-side. Negative values carry an explicit minus sign AND a DOWN label.
 
 == PRICES (Coinbase last where listed; CoinGecko otherwise) ==
-BTC: 84599.99 | 24h +0.14% (UP) | 7d +0.87% (UP) | 30d +3.67% (UP) | mcap $1,700,080,796,055 | vol24h $14,832,862,002 | below cycle high -32.22%
-ETH: 2684.23 | 24h +0.81% (UP) | 7d +0.09% (UP) | 30d +6.75% (UP) | mcap $327,829,045,342 | vol24h $5,554,496,225 | below cycle high -44.44%
-SOL: 119.6 | 24h +1.42% (UP) | 7d -1.11% (DOWN) | 30d +13.86% (UP) | mcap $70,387,152,898 | vol24h $1,651,509,456 | below cycle high -59.46%
-LINK: 14.009 | 24h +2.90% (UP) | 7d -0.44% (DOWN) | 30d +18.70% (UP) | mcap $10,484,741,722 | vol24h $262,249,927 | below cycle high -52.24%
-TAO: 296.77 | 24h +3.56% (UP) | 7d -7.08% (DOWN) | 30d +29.67% (UP) | mcap $3,364,773,758 | vol24h $148,615,600 | below cycle high -60.96%
-ONDO: 0.49392 | 24h +1.44% (UP) | 7d -7.78% (DOWN) | 30d +34.50% (UP) | mcap $2,402,541,692 | vol24h $132,431,860 | below cycle high -76.92%
-AERO: 0.82937 | 24h +7.37% (UP) | 7d -5.15% (DOWN) | 30d +64.06% (UP) | mcap $830,135,324 | vol24h $48,449,167 | below cycle high -64.25%
-MORPHO: 2.7714 | 24h +9.09% (UP) | 7d +1.71% (UP) | 30d +9.41% (UP) | mcap $1,937,126,286 | vol24h $25,809,749 | below cycle high -30.72%
-HYPE: 89.3 | 24h +3.07% (UP) | 7d -2.60% (DOWN) | 30d +4.03% (UP) | mcap $19,860,197,734 | vol24h $607,128,977 | below cycle high -8.16%
-NEAR: 4.7571 | 24h +2.22% (UP) | 7d -1.98% (DOWN) | 30d +139.31% (UP) | mcap $6,202,738,994 | vol24h $445,415,917 | below cycle high -46.55%
-SYRUP: 0.2575 | 24h +9.55% (UP) | 7d +16.75% (UP) | 30d +21.36% (UP) | mcap $300,803,391 | vol24h $10,988,697 | below cycle high -60.73%
-watch: AAVE 180.65 (-0.34% (DOWN)) · UNI 9.0303 (+3.16% (UP)) · ZEC 1319.37 (+2.80% (UP)) · DASH 58.87 (+3.71% (UP)) · RENDER 1.9689 (+3.46% (UP)) · ICP 3.328 (+3.34% (UP)) · XRP 1.4873 (+1.00% (UP)) · SUI 1.1761 (+4.59% (UP)) · AVAX 11.082 (+4.73% (UP)) · BNB 786.43 (+2.81% (UP)) · PUMP 0.006259 (+18.78% (UP)) · DOGE 0.09295 (+1.47% (UP)) · FET 0.22507 (+3.76% (UP)) · HNT 0.497 (+1.47% (UP)) · XLM 0.215722 (+1.71% (UP)) · PLUME 0.01789 (+0.46% (UP)) · SKY 0.08877 (+1.88% (UP)) · PENDLE 2.3773 (+2.82% (UP)) · ASTER 0.7146 (+0.26% (UP)) · ENA 0.23681 (+1.84% (UP)) · ADA 0.24483 (+2.03% (UP)) · BONK 0.00000381 (+6.70% (UP)) · PEPE 0.00000431 (+3.38% (UP)) · JTO 0.5671 (+11.77% (UP)) · KMNO 0.04038 (+0.85% (UP)) · RAY 2.0827 (+11.79% (UP)) · DRIFT 0.0201 (+6.38% (UP)) · VELO 0.03659 (+7.95% (UP)) · PYTH 0.07781 (+2.07% (UP)) · ZRO 2.0324 (+15.25% (UP)) · QNT 265.85 (+14.92% (UP)) · ETHFI 0.72 (+4.50% (UP)) · LDO 0.46099 (+7.50% (UP)) · CAKE 2.519 (+1.94% (UP)) · SPK 0.02494 (-1.24% (DOWN)) · GRASS 0.7206 (+5.93% (UP)) · WAL 0.03481 (+4.51% (UP)) · XMR 557.83 (+3.53% (UP))
+BTC: 84787.02 | 24h +0.27% (UP) | 7d +0.57% (UP) | 30d +4.43% (UP) | mcap $1,703,818,082,003 | vol24h $14,700,201,375 | below cycle high -32.07%
+ETH: 2690.01 | 24h +0.65% (UP) | 7d -0.06% (DOWN) | 30d +7.61% (UP) | mcap $328,533,288,691 | vol24h $5,133,665,415 | below cycle high -44.32%
+SOL: 119.96 | 24h +0.72% (UP) | 7d -1.25% (DOWN) | 30d +14.83% (UP) | mcap $70,544,259,170 | vol24h $1,557,926,133 | below cycle high -59.34%
+LINK: 14.14 | 24h +1.83% (UP) | 7d +0.31% (UP) | 30d +19.20% (UP) | mcap $10,576,896,415 | vol24h $255,286,165 | below cycle high -51.79%
+TAO: 307.1 | 24h +4.24% (UP) | 7d -3.88% (DOWN) | 30d +36.02% (UP) | mcap $3,484,249,509 | vol24h $170,817,825 | below cycle high -59.6%
+ONDO: 0.49922 | 24h +0.93% (UP) | 7d -6.07% (DOWN) | 30d +38.31% (UP) | mcap $2,432,233,864 | vol24h $132,464,454 | below cycle high -76.67%
+AERO: 0.84075 | 24h +5.88% (UP) | 7d -2.33% (DOWN) | 30d +67.04% (UP) | mcap $841,015,797 | vol24h $53,525,470 | below cycle high -63.76%
+MORPHO: 2.7757 | 24h +7.99% (UP) | 7d +1.78% (UP) | 30d +10.77% (UP) | mcap $1,943,834,934 | vol24h $26,136,575 | below cycle high -30.61%
+HYPE: 89.54 | 24h -0.38% (DOWN) | 7d -2.78% (DOWN) | 30d +4.01% (UP) | mcap $19,922,571,582 | vol24h $492,962,259 | below cycle high -7.91%
+NEAR: 4.8627 | 24h +3.13% (UP) | 7d -2.87% (DOWN) | 30d +146.47% (UP) | mcap $6,360,938,748 | vol24h $482,145,657 | below cycle high -45.36%
+SYRUP: 0.2564 | 24h +5.48% (UP) | 7d +17.41% (UP) | 30d +23.24% (UP) | mcap $298,996,666 | vol24h $10,441,288 | below cycle high -60.9%
+watch: AAVE 182.24 (+1.75% (UP)) · UNI 9.0815 (+0.34% (UP)) · ZEC 1316.22 (-0.58% (DOWN)) · DASH 59.56 (+0.30% (UP)) · RENDER 1.983 (-0.60% (DOWN)) · ICP 3.3456 (+0.80% (UP)) · XRP 1.4892 (-0.01% (DOWN)) · SUI 1.1805 (+0.22% (UP)) · AVAX 11.113 (+2.06% (UP)) · BNB 786.24 (+2.27% (UP)) · PUMP 0.00627 (+14.52% (UP)) · DOGE 0.09298 (-0.49% (DOWN)) · FET 0.22559 (+2.36% (UP)) · HNT 0.5113 (+3.88% (UP)) · XLM 0.216155 (+0.12% (UP)) · PLUME 0.01806 (-1.40% (DOWN)) · SKY 0.0916 (+5.35% (UP)) · PENDLE 2.48 (+4.95% (UP)) · ASTER 0.7164 (-1.16% (DOWN)) · ENA 0.23924 (+1.82% (UP)) · ADA 0.24433 (-1.00% (DOWN)) · BONK 0.00000381 (+4.24% (UP)) · PEPE 0.00000431 (+0.82% (UP)) · JTO 0.5666 (+8.41% (UP)) · KMNO 0.04045 (-0.99% (DOWN)) · RAY 2.0833 (+7.49% (UP)) · DRIFT 0.02001 (+3.18% (UP)) · VELO 0.03727 (+6.42% (UP)) · PYTH 0.07818 (-3.37% (DOWN)) · ZRO 1.9831 (+12.67% (UP)) · QNT 257.46 (+3.50% (UP)) · ETHFI 0.721 (+2.06% (UP)) · LDO 0.46799 (+5.31% (UP)) · CAKE 2.521 (+0.87% (UP)) · SPK 0.02508 (-4.12% (DOWN)) · GRASS 0.72 (+1.35% (UP)) · WAL 0.03497 (+1.41% (UP)) · XMR 552.32 (+2.33% (UP))
 
-== BOOK == total $220,951 = alts $196,845 + BTC sleeve $14,071 (0.166319 BTC @ 84599.99) + USDC $10,036 | alts unrealized $52,099
-  ETH 16.00009977 @ 2684.23 = $42,948 (19.44% of book; P/L 27.78%)
-  LINK 1563.9434248 @ 14.009 = $21,909 (9.92% of book; P/L 9.87%)
-  TAO 42.99167469 @ 296.77 = $12,759 (5.77% of book; P/L 34.47%)
-  ONDO 39142.69830469 @ 0.49392 = $19,333 (8.75% of book; P/L -29.44%)
-  AERO 17328.53125748 @ 0.82937 = $14,372 (6.5% of book; P/L 72.89%)
-  MORPHO 5135.91396466 @ 2.7714 = $14,234 (6.44% of book; P/L 121.71%)
-  HYPE 397.47471178 @ 89.3 = $35,494 (16.06% of book; P/L 96.78%)
-  NEAR 3670.94 @ 4.7571 = $17,463 (7.9% of book; P/L 152.67%)
-  SYRUP 45190.33270043 @ 0.2575 = $11,637 (5.27% of book; P/L 48.84%)
-  SOL 55.98547617 @ 119.6 = $6,696 (3.03% of book; P/L -1.65%)
-  ORDERS: C SOL BUY 30@112.79 (-5.69%) · C AERO SELL 1400@1.12 (35.04%) · C AERO SELL 1947@1.5 (80.86%) · C ONDO SELL 4000@0.61 (23.5%) · C TAO SELL 5.5@560 (88.7%) · C HYPE SELL 25@101 (13.1%) · C HYPE SELL 41.7@140 (56.77%) · C HYPE SELL 37.9@160 (79.17%) · C MORPHO SELL 675@3.45 (24.49%) · C MORPHO SELL 614@4.5 (62.37%) · C SYRUP SELL 4929@0.55 (113.59%) · R ETH SELL 1.32@4500 (67.65%) · R ETH SELL 1.2@5450 (103.04%) · R LINK SELL 172.03@23.5 (67.75%) · R LINK SELL 156@28 (99.87%)
+== BOOK == total $222,604 = alts $198,466 + BTC sleeve $14,102 (0.166319 BTC @ 84787.02) + USDC $10,036 | alts unrealized $53,721
+  ETH 16.00009977 @ 2690.01 = $43,040 (19.34% of book; P/L 28.06%)
+  LINK 1563.9434248 @ 14.14 = $22,114 (9.93% of book; P/L 10.9%)
+  TAO 42.99167469 @ 307.1 = $13,203 (5.93% of book; P/L 39.15%)
+  ONDO 39142.69830469 @ 0.49922 = $19,541 (8.78% of book; P/L -28.68%)
+  AERO 17328.53125748 @ 0.84075 = $14,569 (6.54% of book; P/L 75.27%)
+  MORPHO 5135.91396466 @ 2.7757 = $14,256 (6.4% of book; P/L 122.06%)
+  HYPE 397.47471178 @ 89.54 = $35,590 (15.99% of book; P/L 97.31%)
+  NEAR 3670.94 @ 4.8627 = $17,851 (8.02% of book; P/L 158.28%)
+  SYRUP 45190.33270043 @ 0.2564 = $11,587 (5.21% of book; P/L 48.21%)
+  SOL 55.98547617 @ 119.96 = $6,716 (3.02% of book; P/L -1.35%)
+  ORDERS: C SOL BUY 30@112.79 (-5.98%) · C AERO SELL 1400@1.12 (33.21%) · C AERO SELL 1947@1.5 (78.41%) · C ONDO SELL 4000@0.61 (22.19%) · C TAO SELL 5.5@560 (82.35%) · C HYPE SELL 25@101 (12.8%) · C HYPE SELL 41.7@140 (56.35%) · C HYPE SELL 37.9@160 (78.69%) · C MORPHO SELL 675@3.45 (24.29%) · C MORPHO SELL 614@4.5 (62.12%) · C SYRUP SELL 4929@0.55 (114.51%) · R ETH SELL 1.32@4500 (67.29%) · R ETH SELL 1.2@5450 (102.6%) · R LINK SELL 172.03@23.5 (66.2%) · R LINK SELL 156@28 (98.02%)
 
-== BTC STRUCTURE (Coinbase weekly) == spot 84572.26 | last completed close 2026-09-27 84462.14 | 20W 70318.07 (ABOVE; rising strict true / 4wk true) | 50W 78176.08 (ABOVE; rising false; 2 consecutive closes above) | 200W 65834.86 | weekly RSI 61.6
-  NEXT CLOSE 2026-10-04: 50W gate 77553.62 (spot 9.05% vs gate) | 20W gate 69944.94 | 50W rises if close > 108676.78 | 20W rises strict if > 77407.59, 4wk-slope if > 74418.67
-  T09: 90d high 87397 (2026-09-21) → confirmed-path levels 80405 / 74287 / 68170 | unconfirmed 74287 / 65548 / 56808 | power-law FV 156553 ratio 0.54 (MAX-DCA true) | new cycle high printed: false
+== BTC STRUCTURE (Coinbase weekly) == spot 84784.46 | last completed close 2026-09-27 84462.14 | 20W 70318.07 (ABOVE; rising strict true / 4wk true) | 50W 78176.08 (ABOVE; rising false; 2 consecutive closes above) | 200W 65834.86 | weekly RSI 61.6
+  NEXT CLOSE 2026-10-04: 50W gate 77553.62 (spot 9.32% vs gate) | 20W gate 69944.94 | 50W rises if close > 108676.78 | 20W rises strict if > 77407.59, 4wk-slope if > 74418.67
+  T09: 90d high 87397 (2026-09-21) → confirmed-path levels 80405 / 74287 / 68170 | unconfirmed 74287 / 65548 / 56808 | power-law FV 156553 ratio 0.542 (MAX-DCA true) | new cycle high printed: false
 
 == RUNNER FLAGS (T20) ==
-  NEAR: level 3.7691 (0.70 × 5.3844 on 2026-09-27) | last close 4.6911 | live 4.7523 (26.09% vs level) | FIRED on close: false
-  AERO: level 0.6059 (0.70 × 0.86551 on 2026-09-26) | last close 0.79236 | live 0.83003 (36.99% vs level) | FIRED on close: false
-  HYPE: level 68.06 (0.70 × 97.23 on 2026-09-22) | last close 89.12 | live 89.32 (31.24% vs level) | FIRED on close: false
+  NEAR: level 3.7691 (0.70 × 5.3844 on 2026-09-27) | last close 4.8315 | live 4.8535 (28.77% vs level) | FIRED on close: false
+  AERO: level 0.6059 (0.70 × 0.86551 on 2026-09-26) | last close 0.84688 | live 0.84038 (38.7% vs level) | FIRED on close: false
+  HYPE: level 68.06 (0.70 × 97.23 on 2026-09-22) | last close 89.29 | live 89.49 (31.49% vs level) | FIRED on close: false
 
 == KILL-SWITCH v3 PRE-GRADE (mechanical) == score 25 — CLEAR (mechanical part; add judgment grades for Oil/Hormuz RED and DAT); ungraded: etf, dat
   liquidity: AMBER {"netliq_13w_pct":7.83,"hike_within_90d":true}
   credit: AMBER {"hy_oas":{"date":"2026-10-01","value":3.24},"oas_change_4w_bp":59,"move":null,"move_weekly_closes_gt120":null}
   trend: GREEN {"close":84462.14,"sma20":70318.07,"sma50":78176.08,"sma50_rising":false,"week_ending":"2026-09-27"}
-  stablecoins: GREEN {"change_4w_pct":0.983,"change_8w_pct":2.428,"total_b":311.901}
+  stablecoins: GREEN {"change_4w_pct":0.98,"change_8w_pct":2.425,"total_b":311.893}
   etf: n/a {"manual":true}
   oil: AMBER {"brent":113.96}
   dat: n/a {}
-  leverage: GREEN {"btc_funding_8h_pct_range":[0,0.00562]}
-  dominance: GREEN {"weight":0,"btc_dominance_pct":58.58}
+  leverage: GREEN {"btc_funding_8h_pct_range":[0,0.00785]}
+  dominance: GREEN {"weight":0,"btc_dominance_pct":58.61}
 
 == LIQUIDITY == net liquidity -941942.5B on 2026-09-30 (WALCL 6743B − TGA 948674B − RRP 11.539B) | 4w -2% | 13w +7.83% (UP) | HY OAS 3.24 (2026-10-01; 4w 59bp) | Fed 4% upper; last HIKE 2026-09-17 | Sahm 0 (2026-09-01)
-== STABLECOINS (DefiLlama) == 311.901B on 2026-10-03 | 1d 0.123% | 7d 1.334% | 4w 0.983% | 8w +2.43% (UP) | KS4 GREEN
+== STABLECOINS (DefiLlama) == 311.893B on 2026-10-03 | 1d 0.121% | 7d 1.331% | 4w 0.98% | 8w +2.42% (UP) | KS4 GREEN
 == MACRO (FRED+Yahoo) == MOVE n/a | Brent 113.96 | DXY 120.33 | VIX 16.39 | 10Y null% | MSTR n/a · COIN n/a · HOOD n/a · IBIT n/a · GC=F n/a · ^GSPC n/a
-== FUNDING/OI == BTC funding 8h 0% to 0.00562% across 3 venues → GREEN | DVOL 35.42 | BTC: HL 0.00562%/8h OI $3,125,417,779 OKX 0.00419% OI $2,404,170,822 · ETH: HL 0.01%/8h OI $3,227,215,247 OKX 0.00453% OI $1,590,812,230 · SOL: HL -0.00202%/8h OI $650,251,341 OKX 0.00041% OI $354,322,767 · HYPE: HL 0.01%/8h OI $1,816,819,621 OKX 0.01% OI $97,839,998 · LINK: HL 0.01%/8h OI $82,574,697 OKX 0.00608% OI $30,251,587 · TAO: HL 0.01%/8h OI $71,262,366 OKX 0.01% OI $24,289,523 · NEAR: HL 0.01%/8h OI $329,489,775 OKX 0.01% OI $56,439,120 · ONDO: HL 0.01%/8h OI $58,956,194 OKX 0.005% OI $20,520,359
+== FUNDING/OI == BTC funding 8h 0% to 0.00785% across 3 venues → GREEN | DVOL 35.47 | BTC: HL 0.00785%/8h OI $3,136,619,563 OKX 0.00302% OI $2,398,487,730 · ETH: HL 0.01%/8h OI $3,225,788,636 OKX 0.00347% OI $1,596,732,465 · SOL: HL 0.00361%/8h OI $653,334,985 OKX -0.00124% OI $355,535,957 · HYPE: HL 0.01%/8h OI $1,825,538,450 OKX 0.00918% OI $97,898,374 · LINK: HL 0.00925%/8h OI $83,334,418 OKX 0.00401% OI $30,043,146 · TAO: HL 0.01%/8h OI $73,677,131 OKX 0.01% OI $24,884,825 · NEAR: HL 0.01%/8h OI $336,650,476 OKX 0.01% OI $59,223,181 · ONDO: HL 0.01%/8h OI $59,662,617 OKX 0.005% OI $20,877,692
 == ETF FLOWS == MANUAL — Farside returns 403 to server fetches; read farside.co.uk/btc by hand
-== GLOBAL == BTC dominance 58.58% | ETH 11.3% | total mcap $2,894,015,062,085 (24h -2.08%) | F&G 67 Greed
-== VALUE CAPTURE (DefiLlama 30d) == HYPE [hyperliquid] TVL $7,322,408,942 fees30d $72,762,263 rev30d $56,364,490 holders30d $56,364,490 · MORPHO [morpho] TVL $11,340,204,853 fees30d $19,887,678 rev30d $0 holders30d $0 · AERO [aerodrome-slipstream] TVL $233,134,927 fees30d $17,098,910 rev30d $13,851,020 holders30d $13,851,020 · SYRUP [maple] TVL $2,991,352,091 fees30d $9,738,363 rev30d $1,465,963 holders30d $146,597 · ONDO [ondo-finance] TVL $3,525,875,964 fees30d $6,464,237 rev30d $0 holders30d $0 · LINK [chainlink] TVL $1,893,722,861 fees30d $5,539,756 rev30d $5,534,179 holders30d $5,534,179 · UNI [uniswap] TVL $3,941,373,082 fees30d $189,316,333 rev30d $15,059,628 holders30d $15,059,628 · AAVE [aave] TVL $19,242,186,114 fees30d $37,094,570 rev30d $4,890,367 holders30d $0 · PUMP [pump.fun] TVL n/a fees30d $47,968,961 rev30d $34,080,603 holders30d $24,333,492
+== GLOBAL == BTC dominance 58.61% | ETH 11.3% | total mcap $2,903,419,571,123 (24h -2.14%) | F&G 65 Greed
+== VALUE CAPTURE (DefiLlama 30d) == HYPE [hyperliquid] TVL $7,318,130,369 fees30d $72,762,263 rev30d $56,364,490 holders30d $53,666,268 · MORPHO [morpho] TVL $11,339,622,200 fees30d $19,887,678 rev30d $0 holders30d $0 · AERO [aerodrome-slipstream] TVL $232,781,455 fees30d $17,098,910 rev30d $13,851,020 holders30d $13,801,963 · SYRUP [maple] TVL $2,991,342,702 fees30d $9,738,363 rev30d $1,465,963 holders30d $146,585 · ONDO [ondo-finance] TVL $3,525,875,964 fees30d $6,439,543 rev30d $0 holders30d $0 · LINK [chainlink] TVL $1,893,111,482 fees30d $5,539,756 rev30d $5,534,179 holders30d $4,394,742 · UNI [uniswap] TVL $3,942,500,793 fees30d $189,316,333 rev30d $15,059,628 holders30d $15,059,628 · AAVE [aave] TVL $19,260,923,746 fees30d $37,094,570 rev30d $4,892,962 holders30d $0 · PUMP [pump.fun] TVL n/a fees30d $47,968,961 rev30d $33,082,301 holders30d $23,629,486
 == HORMUZ == PortWatch last 2026-09-27: 1 transits (field n_total); 7d avg 3.1 = 3.6% of the ~85/day baseline [VERIFY service URL/field]
-   straits.live 2026-10-03: 1 transits mentioned; Strait of Hormuz Status: October 3, 2026 | Straits Daily Brief Skip to content Straits Hormuz Live Monitor Day  217 Open? Live map News About Method API Live  Strait of Hormuz · Daily brief · UTC 3 October 2026 . Brent $ 102.25 -0.11 % · Transits 1 (2026-09-27) · AI-assisted 01 Five Indian nationals were rescued after a Kuwait-flagged tanker was struck by a projectile in the Strait of Hormuz on October 1, per TheWire.in, Anadolu Ajansı, FM Bharat, and UA.NEWS.  02 Al Jazeera reports oil tankers 
+   straits.live 2026-10-03: undefined transits mentioned; Skip to content Straits Hormuz Live Monitor Day  217 Open? Live map News About Method API Live  Strait of Hormuz · Daily brief · UTC 3 October 2026 . Brent $ 102.25 -0.11 % · Transits 1 (2026-09-27) · AI-assisted 01 The Times of Israel says the American blockade of the Strait of Hormuz is &#x27;ironclad,&#x27; per The Times of Israel; the claim has not been independently confirmed.  02 A Kuwait-flagged tanker was struck by a projectile in the Strait of Hormuz on October 1, with five Indian natio
 
-STATUS: prices=ok 307ms | book=ok 0ms | btc_structure=ok 630ms | runner_flags=ok 501ms | ks_pregrade=ok 0ms | fred=ok 97ms | stablecoins=ok 30ms | macro=ok 92634ms | funding=ok 683ms | etf_flows_btc=manual | etf_flows_eth=manual | global=ok 171ms | fear_greed=ok 30ms | llama=ok 95ms | hormuz_portwatch=ok 22ms | hormuz_straits_live=ok 22ms | onchain=skipped | polymarket=skipped | dat=skipped
+STATUS: prices=ok 402ms | book=ok 0ms | btc_structure=ok 713ms | runner_flags=ok 541ms | ks_pregrade=ok 0ms | fred=ok 148ms | stablecoins=ok 50ms | macro=ok 91809ms | funding=ok 757ms | etf_flows_btc=manual | etf_flows_eth=manual | global=ok 249ms | fear_greed=ok 46ms | llama=ok 148ms | hormuz_portwatch=ok 37ms | hormuz_straits_live=ok 464ms | onchain=skipped | polymarket=skipped | dat=skipped
