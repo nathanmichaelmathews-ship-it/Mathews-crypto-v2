@@ -1,10 +1,16 @@
-// api/account.js — READ-ONLY account facts for the hub (v2, Oct 4 2026; SYSTEM.md §5a): Coinbase Advanced balances, open orders, fills with fees.
+// api/account.js — READ-ONLY account facts for the hub (v2.1, Oct 5 2026; SYSTEM.md §5a): Coinbase Advanced balances, open orders, fills with fees.
 // Self-contained (Node crypto + fetch only). Drop it into the hub repo's api/ folder: it is served at /api/account (a file in api/ wins over the /api/:fn rewrite).
 // It can NEVER trade: it only issues GET requests, and it REFUSES TO RUN if the key can trade or transfer.
 // Env (Vercel → Project → Settings → Environment Variables):
 //   COINBASE_KEY_NAME     organizations/{org_id}/apiKeys/{key_id}            (CDP Secret API key, signature algorithm ECDSA, permission: VIEW only)
 //   COINBASE_PRIVATE_KEY  -----BEGIN EC PRIVATE KEY----- … -----END EC PRIVATE KEY-----   (real line breaks or literal \n sequences are both accepted)
 //   HUB_READ_TOKEN        OPTIONAL: a long random string Nathan chooses; FULL mode needs ?k=<token>. Leave it unset and FULL mode is simply off.
+// v2.1 — FINGERPRINT MODE for short URLs (the session fetch tool rejects URLs over ~200 characters): GET /api/account?check=1 with NO lists now also returns
+//   open_fp      every open order as COIN:S|B:fp6 where fp6 = the first 6 hex of sha256('COIN|SIDE|size|limit') with size and limit normalised (8 decimals, zeros stripped)
+//   balance_fp   every non-zero balance as COIN:fp6 of sha256('COIN|total') with the same normalisation (available + hold)
+//   fill_events  coin, side, time, fee_pct, liquidity and the order's fp6 (from the FILLED order list), so a fill maps to a known ticket
+//   cancelled_events  coin, side, time and fp6 of recently cancelled orders (the LADDER GAP diagnosis)
+//   The caller (claude/PICTURE.md) keeps the expected fingerprints, computed the same way, and compares sets: no size, price or balance leaves the server.
 // TWO MODES:
 //   CHECK (no token):  GET /api/account?check=1[&since_days=10][&expect=HYPE:397.4747,NEAR:3670.94,…][&orders=HYPE:S:25@101,ONDO:S:4000@0.61,…][&maybe=NEAR:S:918@5.35,…]
 //        It never REVEALS an amount: it only CONFIRMS or DENIES what the caller already knows.
@@ -25,10 +31,14 @@ export const config = { maxDuration: 30 };
 const HOST = 'api.coinbase.com';
 const b64u = (buf) => Buffer.from(buf).toString('base64url');
 const num = (x) => { const v = Number(x); return Number.isFinite(v) ? v : null; };
-const VERSION = 'account v2 (2026-10-04)';
+const VERSION = 'account v2.1 (2026-10-05)';
 const baseOf = (pid) => String(pid || '').split('-')[0].toUpperCase(); // HYPE-USD and HYPE-USDC are the same book: match on the coin
 const near = (a, b, tol) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= Math.max(1e-12, Math.abs(b) * tol);
 const rnd = (x, d) => (Number.isFinite(x) ? Number(x.toFixed(d)) : null);
+export const norm = (v) => { const n = Number(v); if (!Number.isFinite(n)) return 'NA'; const t = n.toFixed(8); return t.includes('.') ? t.replace(/0+$/, '').replace(/\.$/, '') : t; }; // '41.70000000' → '41.7', '1947.00000000' → '1947'
+export const fp6 = (str) => crypto.createHash('sha256').update(String(str)).digest('hex').slice(0, 6);
+export const orderFp = (coin, side, size, limit) => fp6(`${String(coin).toUpperCase()}|${String(side).toUpperCase()}|${norm(size)}|${norm(limit)}`);
+export const balanceFp = (coin, total) => fp6(`${String(coin).toUpperCase()}|${norm(total)}`);
 
 export function normalizePem(raw) {
   if (!raw) return null;
@@ -93,11 +103,16 @@ export async function collect(fetchImpl, env, { sinceDays = 14, now = Date.now()
   }
   if (perm?.can_view !== true) { const e = new Error('key has no view permission'); e.status = 500; throw e; }
   const since = new Date(now - Math.min(90, Math.max(1, sinceDays)) * 86400000).toISOString();
-  const [accounts, open, fills] = await Promise.all([
+  const [accounts, open, fills, filledList, cancelledList] = await Promise.all([
     paged(fetchImpl, env, '/api/v3/brokerage/accounts', 'limit=250', 'accounts'),
     paged(fetchImpl, env, '/api/v3/brokerage/orders/historical/batch', 'order_status=OPEN&limit=100', 'orders'),
     paged(fetchImpl, env, '/api/v3/brokerage/orders/historical/fills', `start_sequence_timestamp=${encodeURIComponent(since)}&limit=250`, 'fills'),
+    paged(fetchImpl, env, '/api/v3/brokerage/orders/historical/batch', 'order_status=FILLED&limit=100', 'orders', 1).catch(() => []),
+    paged(fetchImpl, env, '/api/v3/brokerage/orders/historical/batch', 'order_status=CANCELLED&limit=100', 'orders', 1).catch(() => []),
   ]);
+  const cfgById = new Map([...filledList, ...cancelledList].map((o) => [o.order_id, orderShape(o)]));
+  const cancelled = cancelledList.map((o) => ({ ...orderShape(o), cancelled_time: o.last_fill_time || o.created_time || null })) // Coinbase gives no cancel timestamp; created_time is the floor
+    .filter((o) => (o.cancelled_time || '') >= since);
   const balances = accounts.map((a) => { const avail = num(a.available_balance?.value) ?? 0; const hold = num(a.hold?.value) ?? 0; return { currency: a.currency, available: avail, hold, total: avail + hold, type: a.type, updated_at: a.updated_at || null }; })
     .filter((b) => b.total > 0).sort((a, b) => a.currency.localeCompare(b.currency));
   const openOrders = open.map(orderShape).sort((a, b) => (a.product_id || '').localeCompare(b.product_id || '') || (a.limit_price ?? 0) - (b.limit_price ?? 0));
@@ -109,11 +124,11 @@ export async function collect(fetchImpl, env, { sinceDays = 14, now = Date.now()
     g.qty += size; g.notional += size * price; g.fees += fee; g.n_fills += 1; if (f.liquidity_indicator) g.liquidity.add(f.liquidity_indicator);
     if (f.trade_time < g.first_time) g.first_time = f.trade_time; if (f.trade_time > g.last_time) g.last_time = f.trade_time; byOrder.set(k, g);
   }
-  const filled = [...byOrder.values()].map((g) => ({ order_id: g.order_id, product_id: g.product_id, side: g.side, qty: g.qty, avg_price: g.qty > 0 ? g.notional / g.qty : null, gross: g.notional, fees: g.fees,
+  const filled = [...byOrder.values()].map((g) => ({ order_id: g.order_id, product_id: g.product_id, side: g.side, qty: g.qty, avg_price: g.qty > 0 ? g.notional / g.qty : null, gross: g.notional, fees: g.fees, cfg: cfgById.get(g.order_id) || null,
     net: g.side === 'SELL' ? g.notional - g.fees : -(g.notional + g.fees), fee_pct: g.notional > 0 ? (g.fees / g.notional) * 100 : null, n_fills: g.n_fills, liquidity: [...g.liquidity].join('/'), first_time: g.first_time, last_time: g.last_time }))
     .sort((a, b) => (a.last_time < b.last_time ? 1 : -1));
   return { generated_utc: new Date(now).toISOString(), venue: 'coinbase-advanced', version: VERSION, permissions: { can_view: perm.can_view === true, can_trade: perm.can_trade === true, can_transfer: perm.can_transfer === true, portfolio_type: perm.portfolio_type || null },
-    balances, open_orders: openOrders, fills_since: since, filled_orders: filled, counts: { balances: balances.length, open_orders: openOrders.length, filled_orders: filled.length, raw_fills: fills.length },
+    balances, open_orders: openOrders, fills_since: since, filled_orders: filled, cancelled_orders: cancelled, counts: { balances: balances.length, open_orders: openOrders.length, filled_orders: filled.length, raw_fills: fills.length },
     notes: ['READ-ONLY: GET requests only; refuses to run if the key can trade or transfer.', 'Robinhood (ETH, LINK) is not included — phase 2.', 'Realized price in the process = the resting limit; fees here are the actual commissions.'] };
 }
 
@@ -132,7 +147,11 @@ export function checkView(o, expectStr = '', ordersStr = '', { sinceDays = null,
   const out = { generated_utc: o.generated_utc, venue: o.venue, mode: 'check', version: VERSION, permissions: o.permissions,
     open_orders_total: o.open_orders.length, open_orders_by_coin: count(o.open_orders, (r) => baseOf(r.product_id)), open_orders_by_product: count(o.open_orders, (r) => r.product_id),
     fills_since: o.fills_since, filled_orders_total: o.filled_orders.length, filled_orders_by_coin: count(o.filled_orders, (r) => baseOf(r.product_id)), filled_orders_by_product: count(o.filled_orders, (r) => r.product_id),
-    fill_events: o.filled_orders.slice(0, 40).map((g) => ({ coin: baseOf(g.product_id), side: g.side, last_fill_utc: g.last_time || null, order_still_open: openIds.has(g.order_id) })),
+    fill_events: o.filled_orders.slice(0, 40).map((g) => ({ coin: baseOf(g.product_id), side: g.side, last_fill_utc: g.last_time || null, order_still_open: openIds.has(g.order_id),
+      fp: g.cfg && g.cfg.size !== null && g.cfg.limit_price !== null ? orderFp(baseOf(g.product_id), g.side, g.cfg.size, g.cfg.limit_price) : null, fee_pct: rnd(g.fee_pct, 4), liquidity: g.liquidity || null })),
+    cancelled_events: (o.cancelled_orders || []).slice(0, 40).map((r) => ({ coin: baseOf(r.product_id), side: r.side, cancelled_utc: r.cancelled_time || null, fp: r.size !== null && r.limit_price !== null ? orderFp(baseOf(r.product_id), r.side, r.size, r.limit_price) : null, filled_pct: rnd(r.completion_pct, 1) })),
+    open_fp: o.open_orders.map((r) => `${baseOf(r.product_id)}:${r.side === 'SELL' ? 'S' : 'B'}:${r.size !== null && r.limit_price !== null ? orderFp(baseOf(r.product_id), r.side, r.size, r.limit_price) : 'NA'}`).sort(),
+    balance_fp: Object.fromEntries(o.balances.map((b) => [b.currency.toUpperCase(), balanceFp(b.currency, b.total)])),
     oldest_open_order_age_days: o.open_orders.reduce((m, r) => (r.age_days !== null && r.age_days > m ? r.age_days : m), 0) };
   const expect = String(expectStr || '').split(',').map((x) => x.trim()).filter(Boolean).slice(0, 40);
   if (expect.length) {
@@ -173,6 +192,7 @@ export function checkView(o, expectStr = '', ordersStr = '', { sinceDays = null,
     out.unmatched_fills = closed.filter((x) => !x.used).map((x) => ({ coin: baseOf(x.g.product_id), side: x.g.side, last_fill_utc: x.g.last_time || null }));
   }
   out.notes = ['CHECK mode confirms or denies what the caller lists; it returns no balance, size, price or dollar fee.',
+    'open_fp / balance_fp / fill fp = first 6 hex of sha256(COIN|SIDE|size|limit) or sha256(COIN|total), numbers at 8 decimals with trailing zeros stripped — compare with the expected fingerprints in claude/PICTURE.md.',
     'orders_check (orders the record says are resting): open = resting · filled = fully filled (fee in dollars = size × limit × fee_pct / 100) · absent = cancelled, expired or never placed.',
     'maybe_check (recommended tickets that may not be placed yet): open = now placed exactly as listed · absent = not placed.',
     'unexpected_open_orders = open orders in neither list (unrecorded) · unmatched_fills = fills on orders in neither list.'];
